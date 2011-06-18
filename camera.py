@@ -18,7 +18,7 @@ class AR(object):
         self.min_size = (20, 20)
         self.haar_flags = 0
         self.capture = cv.CreateCameraCapture(0)
-        self.overlay_image = cv.LoadImage('forever_alone.png',
+        self.overlay_image = cv.LoadImage('caca.png',
                                          cv.CV_LOAD_IMAGE_UNCHANGED)
 
     def detect_and_draw(self, image):
