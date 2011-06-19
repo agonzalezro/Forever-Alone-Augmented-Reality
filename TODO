@@ -1,0 +1,2 @@
+- Fix the size of the image to do it bigger if the user is near the cam.
+- Fix the colors on the image. With an image add (&&) black becomes transparent

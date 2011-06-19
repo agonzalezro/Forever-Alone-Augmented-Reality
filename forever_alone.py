@@ -11,14 +11,14 @@ class AR(object):
         overlay image from a png file.
         """
         self.window_name = 'AR tests'
-        self.cascade = cv.Load('haarcascade_frontalface_alt.xml')
+        self.cascade = cv.Load('res/haarcascade_frontalface_alt.xml')
         self.image_scale = 2
         self.haar_scale = 1.2
         self.min_neighbors = 2
         self.min_size = (20, 20)
         self.haar_flags = 0
         self.capture = cv.CreateCameraCapture(0)
-        self.overlay_image = cv.LoadImage('caca.png',
+        self.overlay_image = cv.LoadImage('res/forever_alone.png',
                                          cv.CV_LOAD_IMAGE_UNCHANGED)
 
     def detect_and_draw(self, image):
@@ -71,8 +71,10 @@ class AR(object):
 
             self.detect_and_draw(frame_copy)
 
-            if cv.WaitKey(10) != -1:
+            # The user press the scape key
+            if cv.WaitKey(10) == 27:
                 break
+
         cv.DestroyWindow(self.window_name)
 
 

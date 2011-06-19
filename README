@@ -1,4 +1,0 @@
-This is only a joke program created to test OpenCV.
-
-If the program detect only one face, the forever alone image will be overlayed,
-in case that it detect faces but more than one, nothing happens.
