@@ -41,12 +41,18 @@ class AR(object):
                                          self.haar_flags, self.min_size)
             if faces and len(faces) == 1:
                 (x, y, w, h), n = faces[0]
+                # 1.25 is a factor to do the overlay bigget than the face
+                width = int(w * self.image_scale * 1.33)
+                height = int(h * self.image_scale * 1.33)
                 cv.SetImageROI(image, (
                                        int(x * self.image_scale),
-                                       int(y * self.image_scale),
-                                       self.overlay_image.width,
-                                       self.overlay_image.height))
-                cv.Add(image, self.overlay_image, image)
+                                       # 0.70 to start the image above the head
+                                       int(y * self.image_scale * 0.70),
+                                       width, height))
+                resized = cv.CreateImage((width, height), cv.IPL_DEPTH_8U, 3)
+                cv.Convert(resized, resized)
+                cv.Resize(self.overlay_image, resized, 2) # CV_INTER_CUBIC
+                cv.Add(image, resized, image)
                 cv.ResetImageROI(image)
 
         cv.ShowImage(self.window_name, image)
@@ -71,8 +77,7 @@ class AR(object):
 
             self.detect_and_draw(frame_copy)
 
-            # The user press the scape key
-            if cv.WaitKey(10) == 27:
+            if cv.WaitKey(15) == 27:
                 break
 
         cv.DestroyWindow(self.window_name)
